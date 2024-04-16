@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            margin: 0;
+
+            background-color: red;
+        }
+
+        .main_div {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: skyblue;
+
+
+
+        }
+
+        .center_div {
+            width: 45%;
+            height: 75vh;
+            border-radius: 8px;
+
+            background-image: url('bgimg.webp');
+        }
+
+        .heading {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 35px;
+            color:whitesmoke;
+            text-align: center;
+            background-color: rgb(127, 246, 255);
+        }
+        table {
+            display: flex;
+            justify-content: center;
+        }
+    
+         .display {
+            height: 120px;
+            font-size: 35px;
+            background-color:rgb(127, 246, 255);
+            border-radius: 120px;
+            border:none;
+            padding-top: 10px;
+          
+
+        }
+       
+    
+        .start{
+            font-size: 45px; 
+            background-color: rgb(127, 246, 255);
+            border-radius: 60px;
+            border:none;
+        }
+        .stop{
+            font-size: 25px; 
+            background-color: rgb(127, 246, 255);
+            border-radius: 20px;
+            border:none;
+        }
+        .reset{
+            font-size: 25px; 
+            background-color: rgb(127, 246, 255);
+            border-radius: 30px;
+            border:none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main_div">
+        <div class="center_div">
+            <p class="heading">Stopwatch</p>
+       
+            <table >
+                <tr>
+                    <th colspan="3" class="display">
+                        <p id="displayTime" >00:00:00</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th rowspan="3" class="stop"> <i class="fa-regular fa-circle-stop" onclick="watchStop();"></i></th>
+                    <th class="start"><i class="fa-regular fa-circle-play" onclick="watchStart();"></i></th>
+                    <th class="reset"><i class="fa-solid fa-arrow-rotate-left" onclick=" watchReset() "></i></th>
+
+                </tr>
+            </table>
+        </p>
+        </div>
+    </div>
+
+    <!-- <script>
+        let [milisec, sec,min,hrs] = [0, 0, 0,0];
+        let displayTime = document.getElementById("displayTime");
+        let timer = null;
+        console.log(timer);
+        function stopWatch() {
+            sec++;
+            if (sec == 60) {
+                sec = 0;
+                min++;
+                if (min == 60) {
+                    min = 0;
+                    hrs++;
+                }
+            }
+            let h = hrs < 10 ? '0' + hrs : hrs;
+            let m = min < 10 ? '0' + min : min;
+            let s = sec < 10 ? '0' + sec : sec;
+            displayTime.innerHTML = h + ":" + m + ":" + s;
+        }
+
+        function watchStart() {
+            if (timer != null) {
+                clearInterval(timer);
+            }
+            timer = setInterval(stopWatch, 1000);
+        }
+
+        function watchStop() {
+
+            clearInterval(timer);
+
+        }
+
+
+        function watchReset() {
+
+            clearInterval(timer);
+            [sec,min,hrs]=[0,0,0];
+            displayTime.innerHTML = "00:00:00";
+
+        }
+
+
+    </script> -->
+
+    <script>
+        let [milisec, sec, min, hrs] = [0, 0, 0, 0];
+        let displayTime = document.getElementById("displayTime");
+        let timer = null;
+    
+        function stopWatch() {
+            milisec += 10; // Increment milliseconds by 10 (you can adjust this value)
+            if (milisec === 1000) {
+                milisec = 0;
+                sec++;
+                if (sec === 60) {
+                    sec = 0;
+                    min++;
+                    if (min === 60) {
+                        min = 0;
+                        hrs++;
+                    }
+                }
+            }
+    
+            let h = hrs < 10 ? '0' + hrs : hrs;
+            let m = min < 10 ? '0' + min : min;
+            let s = sec < 10 ? '0' + sec : sec;
+            let ms = milisec < 10 ? '00' + milisec : milisec < 100 ? '0' + milisec : milisec;
+    
+            displayTime.innerHTML = h + ":" + m + ":" + s + ":" + ms;
+        }
+    
+        function watchStart() {
+            if (timer !== null) {
+                clearInterval(timer);
+            }
+            timer = setInterval(stopWatch, 10); // Run every 10 milliseconds
+        }
+    
+        function watchStop() {
+            clearInterval(timer);
+        }
+    
+        function watchReset() {
+            clearInterval(timer);
+            [milisec, sec, min, hrs] = [0, 0, 0, 0];
+            displayTime.innerHTML = "00:00:00:000";
+        }
+    </script>
+    
+    
+</body>
+
+</html>
